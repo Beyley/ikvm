@@ -72,8 +72,10 @@ namespace IKVM.MSBuild.Tests
                 ("net48",           "win7-x64"),
                 ("netcoreapp3.1",   "win7-x64"),
                 ("net6.0",          "win7-x64"),
+                ("net7.0",          "win7-x64"),
                 ("netcoreapp3.1",   "linux-x64"),
                 ("net6.0",          "linux-x64"),
+                ("net7.0",          "linux-x64"),
             };
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -84,6 +86,7 @@ namespace IKVM.MSBuild.Tests
                     ("net6.0",          "win7-x64"),
                     ("netcoreapp3.1",   "linux-x64"),
                     ("net6.0",          "linux-x64"),
+                    ("net7.0",          "linux-x64"),
                 };
             }
 

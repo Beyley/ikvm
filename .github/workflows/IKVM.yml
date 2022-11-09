@@ -272,6 +272,7 @@ jobs:
         - net461
         - netcoreapp3.1
         - net6.0
+        - net7.0
         sys:
         - windows
         - linux
@@ -280,8 +281,12 @@ jobs:
           sys: linux
         - run: IKVM.Tools.Exporter.Tests
           tfm: net6.0
+        - run: IKVM.Tools.Exporter.Tests
+          tfm: net7.0
         - run: ikvmc.Tests
           tfm: net6.0
+        - run: ikvmc.Tests
+          tfm: net7.0
         - run: IKVM.OpenJDK.Tests?TestPartition=0
           sys: linux
         - run: IKVM.OpenJDK.Tests?TestPartition=1
@@ -307,6 +312,9 @@ jobs:
           sys: windows
         - run: IKVM.MSBuild.Tasks.Tests
           tfm: net6.0
+          sys: windows
+        - run: IKVM.MSBuild.Tasks.Tests
+          tfm: net7.0
           sys: windows
         - run: IKVM.MSBuild.Tests
           tfm: net6.0
