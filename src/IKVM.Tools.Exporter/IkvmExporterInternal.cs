@@ -337,16 +337,16 @@ namespace IKVM.Tools.Exporter
                             ProcessClass(c);
                             WriteClass(c);
                         }
-                        catch (Exception x)
+                        catch (Exception e)
                         {
                             if (continueOnError)
                             {
                                 rc = 1;
-                                Console.WriteLine(x);
+                                Console.WriteLine(e);
                             }
                             else
                             {
-                                throw;
+                                throw new Exception($"Failed to process {c.Name}.", e);
                             }
                         }
                     }

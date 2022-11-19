@@ -22,15 +22,15 @@
   
 */
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+
 using IKVM.Reflection.Metadata;
 
 namespace IKVM.Reflection.Reader
 {
+
 	sealed class FieldDefImpl : FieldInfo
 	{
+
 		private readonly ModuleReader module;
 		private readonly TypeDefImpl declaringType;
 		private readonly int index;
@@ -132,5 +132,7 @@ namespace IKVM.Reflection.Reader
 		{
 			get { return true; }
 		}
+
 	}
+
 }

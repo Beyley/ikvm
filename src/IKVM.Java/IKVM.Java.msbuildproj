@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <PackageId>IKVM.Java</PackageId>
-        <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks>
+        <TargetFrameworks>net461;netcoreapp3.1;net6.0</TargetFrameworks>
         <TransformOnBuild>true</TransformOnBuild>
         <Bootstrap>true</Bootstrap>
     </PropertyGroup>

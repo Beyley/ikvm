@@ -1007,7 +1007,7 @@ namespace IKVM.Java.Externs.java.net
                     // .NET provides property
                     if (opt == global::java.net.SocketOptions.IP_MULTICAST_LOOP)
                     {
-#if NETCOREAPP3_1_OR_GREATER
+#if NETCOREAPP
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                             return socket.MulticastLoopback ? global::java.lang.Boolean.FALSE : global::java.lang.Boolean.TRUE;
                         else
@@ -1152,7 +1152,7 @@ namespace IKVM.Java.Externs.java.net
                     // implementation changes based on IP/IPv6
                     if (opt == global::java.net.SocketOptions.IP_MULTICAST_LOOP)
                     {
-#if NETCOREAPP3_1_OR_GREATER
+#if NETCOREAPP
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         {
                             var val = (global::java.lang.Boolean)value;

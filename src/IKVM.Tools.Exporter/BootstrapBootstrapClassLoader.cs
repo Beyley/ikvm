@@ -28,9 +28,11 @@ using IKVM.Internal;
 
 sealed class BootstrapBootstrapClassLoader : ClassLoaderWrapper
 {
-    internal BootstrapBootstrapClassLoader()
-        : base(CodeGenOptions.None, null)
+
+    internal BootstrapBootstrapClassLoader() :
+        base(CodeGenOptions.None, null)
     {
+
         TypeWrapper javaLangObject = new StubTypeWrapper(Modifiers.Public, "java.lang.Object", null, true);
         SetRemappedType(JVM.Import(typeof(object)), javaLangObject);
         SetRemappedType(JVM.Import(typeof(string)), new StubTypeWrapper(Modifiers.Public | Modifiers.Final, "java.lang.String", javaLangObject, true));
@@ -44,5 +46,7 @@ sealed class BootstrapBootstrapClassLoader : ClassLoaderWrapper
         RegisterInitiatingLoader(new StubTypeWrapper(Modifiers.Public | Modifiers.Abstract | Modifiers.Interface, "java.lang.annotation.Annotation", null, false));
         RegisterInitiatingLoader(new StubTypeWrapper(Modifiers.Public | Modifiers.Final, "java.lang.Class", javaLangObject, false));
         RegisterInitiatingLoader(new StubTypeWrapper(Modifiers.Public | Modifiers.Abstract, "java.lang.invoke.MethodHandle", javaLangObject, false));
+
     }
+
 }

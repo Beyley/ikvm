@@ -144,23 +144,20 @@ namespace IKVM.Reflection
     public sealed class Universe : IDisposable
     {
 
-#if NETCOREAPP3_1_OR_GREATER
-
-        public static readonly string CoreLibName = "netstandard";
-
-
+#if NETCOREAPP
+        public static readonly string CoreLibName = typeof(object).Assembly.GetName().Name;
 #elif NETFRAMEWORK || MONO
-
 		public static readonly string CoreLibName = "mscorlib";
-
 #endif
 
-        internal static readonly bool MonoRuntime = System.Type.GetType("Mono.Runtime") != null;
-#if NET461
-        internal static readonly bool CoreRuntime = false;
-#else
+#if NETCOREAPP
         internal static readonly bool CoreRuntime = true;
+        internal static readonly bool MonoRuntime = false;
+#else
+        internal static readonly bool CoreRuntime = false;
+        internal static readonly bool MonoRuntime = System.Type.GetType("Mono.Runtime") != null;
 #endif
+
         private readonly Dictionary<Type, Type> canonicalizedTypes = new Dictionary<Type, Type>();
         private readonly List<AssemblyReader> assemblies = new List<AssemblyReader>();
         private readonly List<AssemblyBuilder> dynamicAssemblies = new List<AssemblyBuilder>();

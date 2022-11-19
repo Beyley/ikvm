@@ -8,7 +8,7 @@ using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#if NETCOREAPP3_1_OR_GREATER
+#if NETCOREAPP
 using Microsoft.Extensions.DependencyModel;
 #endif
 
@@ -20,25 +20,26 @@ namespace IKVM.Tools.Exporter.Tests
     {
 
         [TestMethod]
-        public async Task Can_stub_library()
+        public async Task CanStubBootstrapLibrary()
         {
             var options = new IkvmExporterOptions()
             {
+                Boostrap = true,
                 NoStdLib = true,
                 References =
                 {
                     Path.Combine(Path.GetDirectoryName(typeof(IkvmExporterTests).Assembly.Location), "IKVM.Runtime.dll"),
                     Path.Combine(Path.GetDirectoryName(typeof(IkvmExporterTests).Assembly.Location), "IKVM.Java.dll"),
-                }
+                },
             };
 
-#if NET461
+#if NETFRAMEWORK
             options.Libraries.Add(RuntimeEnvironment.GetRuntimeDirectory());
-            options.Assembly = typeof(System.Linq.Enumerable).Assembly.Location;
+            options.Assembly = typeof(object).Assembly.Location;
             options.Output = Path.Combine(Path.GetTempPath(), Path.GetFileName(Path.ChangeExtension(options.Assembly, ".jar")));
 #else
             options.References.AddRange(DependencyContext.Default.CompileLibraries.SelectMany(i => i.ResolveReferencePaths()));
-            options.Assembly = typeof(System.Linq.Enumerable).Assembly.Location;
+            options.Assembly = typeof(object).Assembly.Location;
             options.Output = Path.Combine(Path.GetTempPath(), Path.GetFileName(Path.ChangeExtension(options.Assembly, ".jar")));
 #endif
 
