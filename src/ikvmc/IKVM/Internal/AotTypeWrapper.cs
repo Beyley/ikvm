@@ -1092,7 +1092,7 @@ namespace IKVM.Internal
             TypeBuilder typeBuilder = classLoader.GetTypeWrapperFactory().ModuleBuilder.DefineType(mangledTypeName, typeAttribs, Types.ValueType);
             AttributeHelper.SetGhostInterface(typeBuilder);
             AttributeHelper.SetModifiers(typeBuilder, Modifiers, IsInternal);
-            ghostRefField = typeBuilder.DefineField("__<ref>", Types.Object, FieldAttributes.Public | FieldAttributes.SpecialName);
+            ghostRefField = typeBuilder.DefineField("___ref_", Types.Object, FieldAttributes.Public | FieldAttributes.SpecialName);
             typeBuilderGhostInterface = typeBuilder.DefineNestedType("__Interface", TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.NestedPublic);
             AttributeHelper.HideFromJava(typeBuilderGhostInterface);
             ghostIsInstanceMethod = typeBuilder.DefineMethod("IsInstance", MethodAttributes.HideBySig | MethodAttributes.Public | MethodAttributes.Static, Types.Boolean, new Type[] { Types.Object });

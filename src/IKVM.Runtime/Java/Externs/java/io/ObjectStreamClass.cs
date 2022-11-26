@@ -243,10 +243,10 @@ namespace IKVM.Java.Externs.java.io
 					{
 						throw x.ToJava();
 					}
-					DynamicMethod dmObjGetter = DynamicMethodUtils.Create("__<ObjFieldGetter>", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(object[]) });
-					DynamicMethod dmPrimGetter = DynamicMethodUtils.Create("__<PrimFieldGetter>", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(byte[]) });
-					DynamicMethod dmObjSetter = DynamicMethodUtils.Create("__<ObjFieldSetter>", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(object[]) });
-					DynamicMethod dmPrimSetter = DynamicMethodUtils.Create("__<PrimFieldSetter>", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(byte[]) });
+					DynamicMethod dmObjGetter = DynamicMethodUtils.Create("___ObjFieldGetter_", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(object[]) });
+					DynamicMethod dmPrimGetter = DynamicMethodUtils.Create("___PrimFieldGetter_", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(byte[]) });
+					DynamicMethod dmObjSetter = DynamicMethodUtils.Create("___ObjFieldSetter_", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(object[]) });
+					DynamicMethod dmPrimSetter = DynamicMethodUtils.Create("___PrimFieldSetter_", tw.TypeAsBaseType, true, null, new Type[] { typeof(object), typeof(byte[]) });
 					CodeEmitter ilgenObjGetter = CodeEmitter.Create(dmObjGetter);
 					CodeEmitter ilgenPrimGetter = CodeEmitter.Create(dmPrimGetter);
 					CodeEmitter ilgenObjSetter = CodeEmitter.Create(dmObjSetter);

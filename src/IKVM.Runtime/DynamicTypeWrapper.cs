@@ -1858,7 +1858,7 @@ namespace IKVM.Internal
                     {
                         // In dynamic mode, we may need to emit a call to this method from a DynamicMethod which doesn't support calling unfinished methods,
                         // so we must resolve to the real method here.
-                        finishedClinitMethod = type.GetMethod("__<clinit>", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                        finishedClinitMethod = type.GetMethod("___clinit_", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
                     }
 #endif
                     finishedType = new FinishedTypeImpl(type, innerClassesTypeWrappers, declaringTypeWrapper, wrapper.ReflectiveModifiers, Metadata.Create(classFile), finishedClinitMethod, finalizeMethod, host);
@@ -2829,7 +2829,7 @@ namespace IKVM.Internal
                     return Types.Object.GetMethod("Finalize", BindingFlags.NonPublic | BindingFlags.Instance);
                 }
                 Type type = wrapper.TypeAsBaseType;
-                MethodInfo baseFinalize = type.GetMethod("__<Finalize>", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
+                MethodInfo baseFinalize = type.GetMethod("___Finalize_", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
                 if (baseFinalize != null)
                 {
                     return baseFinalize;
@@ -3352,7 +3352,7 @@ namespace IKVM.Internal
                         MethodWrapper mwClash = wrapper.GetMethodWrapper(finalizeName, StringConstants.SIG_VOID, true);
                         if (mwClash != null && mwClash.GetMethod() != baseFinalize)
                         {
-                            finalizeName = "__<Finalize>";
+                            finalizeName = "___Finalize_";
                         }
                         MethodAttributes attr = MethodAttributes.HideBySig | MethodAttributes.Virtual;
                         // make sure we don't reduce accessibility
@@ -4129,8 +4129,8 @@ namespace IKVM.Internal
                 MethodInfo method;
                 if (!dynamicClassLiteral.TryGetValue(cacheKey, out method))
                 {
-                    FieldBuilder fb = typeBuilder.DefineField("__<>class", CoreClasses.java.lang.Class.Wrapper.TypeAsSignatureType, FieldAttributes.PrivateScope | FieldAttributes.Static);
-                    MethodBuilder mb = DefineHelperMethod("__<>class", CoreClasses.java.lang.Class.Wrapper.TypeAsSignatureType, Type.EmptyTypes);
+                    FieldBuilder fb = typeBuilder.DefineField("____class", CoreClasses.java.lang.Class.Wrapper.TypeAsSignatureType, FieldAttributes.PrivateScope | FieldAttributes.Static);
+                    MethodBuilder mb = DefineHelperMethod("____class", CoreClasses.java.lang.Class.Wrapper.TypeAsSignatureType, Type.EmptyTypes);
                     CodeEmitter ilgen2 = CodeEmitter.Create(mb);
                     ilgen2.Emit(OpCodes.Ldsfld, fb);
                     CodeEmitterLabel label = ilgen2.DefineLabel();
@@ -4179,8 +4179,8 @@ namespace IKVM.Internal
             private void CreateGetCallerID()
             {
                 TypeWrapper tw = CoreClasses.ikvm.@internal.CallerID.Wrapper;
-                FieldBuilder callerIDField = typeBuilder.DefineField("__<callerID>", tw.TypeAsSignatureType, FieldAttributes.Private | FieldAttributes.Static | FieldAttributes.SpecialName);
-                MethodBuilder mb = DefineHelperMethod("__<GetCallerID>", tw.TypeAsSignatureType, Type.EmptyTypes);
+                FieldBuilder callerIDField = typeBuilder.DefineField("___callerID_", tw.TypeAsSignatureType, FieldAttributes.Private | FieldAttributes.Static | FieldAttributes.SpecialName);
+                MethodBuilder mb = DefineHelperMethod("___GetCallerID_", tw.TypeAsSignatureType, Type.EmptyTypes);
                 callerIDMethod = mb;
                 CodeEmitter ilgen = CodeEmitter.Create(mb);
                 ilgen.Emit(OpCodes.Ldsfld, callerIDField);
@@ -4268,7 +4268,7 @@ namespace IKVM.Internal
                                     MethodAttributes attr = mi.Attributes & ~(MethodAttributes.Abstract | MethodAttributes.NewSlot);
                                     if (needRename)
                                     {
-                                        name = "__CC" + name + "/" + mi.DeclaringType.FullName;
+                                        name = "____" + name + "/" + mi.DeclaringType.FullName;
                                         attr = MethodAttributes.Private | MethodAttributes.Virtual | MethodAttributes.NewSlot;
                                     }
                                     MethodBuilder mb = mw.GetDefineMethodHelper().DefineMethod(wrapper, typeBuilder, name, attr);
@@ -5718,7 +5718,7 @@ namespace IKVM.Internal
 
                 internal static void Generate(DynamicTypeWrapper.FinishContext context, CodeEmitter ilGenerator, DynamicTypeWrapper wrapper, MethodWrapper mw, TypeBuilder typeBuilder, ClassFile classFile, ClassFile.Method m, TypeWrapper[] args)
                 {
-                    TypeBuilder tb = mod.DefineType("__<jni>" + System.Threading.Interlocked.Increment(ref count), TypeAttributes.Public | TypeAttributes.Class);
+                    TypeBuilder tb = mod.DefineType("___jni_" + System.Threading.Interlocked.Increment(ref count), TypeAttributes.Public | TypeAttributes.Class);
                     int instance = m.IsStatic ? 0 : 1;
                     Type[] argTypes = new Type[args.Length + instance + 1];
                     if (instance != 0)
@@ -5786,7 +5786,7 @@ namespace IKVM.Internal
                     }
                     string sig = m.Signature.Replace('.', '/');
                     // TODO use/unify JNI.METHOD_PTR_FIELD_PREFIX
-                    FieldBuilder methodPtr = typeBuilder.DefineField("__<jniptr>" + m.Name + sig, Types.IntPtr, FieldAttributes.Static | FieldAttributes.PrivateScope);
+                    FieldBuilder methodPtr = typeBuilder.DefineField("___jniptr_" + m.Name + sig, Types.IntPtr, FieldAttributes.Static | FieldAttributes.PrivateScope);
                     CodeEmitterLocal localRefStruct = ilGenerator.DeclareLocal(localRefStructType);
                     ilGenerator.Emit(OpCodes.Ldloca, localRefStruct);
                     ilGenerator.Emit(OpCodes.Initobj, localRefStructType);
@@ -6151,7 +6151,7 @@ namespace IKVM.Internal
                     parameterTypes[i] = parameters[i].ParameterType;
                 }
                 MethodAttributes attr = MethodAttributes.NewSlot | MethodAttributes.Virtual | MethodAttributes.Private;
-                MethodBuilder m = typeBuilder.DefineMethod("__<unsupported>" + mb.DeclaringType.FullName + "/" + mb.Name, attr, ((MethodInfo)mb).ReturnType, parameterTypes);
+                MethodBuilder m = typeBuilder.DefineMethod("___unsupported_" + mb.DeclaringType.FullName + "/" + mb.Name, attr, ((MethodInfo)mb).ReturnType, parameterTypes);
                 if (mb.IsGenericMethodDefinition)
                 {
                     CopyGenericArguments(mb, m);
@@ -6429,27 +6429,27 @@ namespace IKVM.Internal
 
             internal MethodBuilder DefineMethodHandleDispatchStub(Type returnType, Type[] parameterTypes)
             {
-                return DefineHelperMethod("__<>MHC", returnType, parameterTypes);
+                return DefineHelperMethod("____MHC", returnType, parameterTypes);
             }
 
             internal FieldBuilder DefineMethodHandleInvokeCacheField(Type fieldType)
             {
-                return typeBuilder.DefineField("__<>invokeCache", fieldType, FieldAttributes.Static | FieldAttributes.PrivateScope);
+                return typeBuilder.DefineField("____invokeCache", fieldType, FieldAttributes.Static | FieldAttributes.PrivateScope);
             }
 
             internal FieldBuilder DefineDynamicMethodHandleCacheField()
             {
-                return typeBuilder.DefineField("__<>dynamicMethodHandleCache", CoreClasses.java.lang.invoke.MethodHandle.Wrapper.TypeAsSignatureType, FieldAttributes.Static | FieldAttributes.PrivateScope);
+                return typeBuilder.DefineField("____dynamicMethodHandleCache", CoreClasses.java.lang.invoke.MethodHandle.Wrapper.TypeAsSignatureType, FieldAttributes.Static | FieldAttributes.PrivateScope);
             }
 
             internal FieldBuilder DefineDynamicMethodTypeCacheField()
             {
-                return typeBuilder.DefineField("__<>dynamicMethodTypeCache", CoreClasses.java.lang.invoke.MethodType.Wrapper.TypeAsSignatureType, FieldAttributes.Static | FieldAttributes.PrivateScope);
+                return typeBuilder.DefineField("____dynamicMethodTypeCache", CoreClasses.java.lang.invoke.MethodType.Wrapper.TypeAsSignatureType, FieldAttributes.Static | FieldAttributes.PrivateScope);
             }
 
             internal MethodBuilder DefineDelegateInvokeErrorStub(Type returnType, Type[] parameterTypes)
             {
-                return DefineHelperMethod("__<>", returnType, parameterTypes);
+                return DefineHelperMethod("____", returnType, parameterTypes);
             }
 
             internal MethodInfo GetInvokeSpecialStub(MethodWrapper method)
@@ -6463,7 +6463,7 @@ namespace IKVM.Internal
                 if (!invokespecialstubcache.TryGetValue(key, out mi))
                 {
                     DefineMethodHelper dmh = method.GetDefineMethodHelper();
-                    MethodBuilder stub = dmh.DefineMethod(wrapper, typeBuilder, "__<>", MethodAttributes.PrivateScope);
+                    MethodBuilder stub = dmh.DefineMethod(wrapper, typeBuilder, "____", MethodAttributes.PrivateScope);
                     CodeEmitter ilgen = CodeEmitter.Create(stub);
                     ilgen.Emit(OpCodes.Ldarg_0);
                     for (int i = 1; i <= dmh.ParameterCount; i++)
@@ -6534,7 +6534,7 @@ namespace IKVM.Internal
         {
             Debug.Assert(!baseMethod.HasCallerID);
 
-            MethodBuilder overrideStub = baseMethod.GetDefineMethodHelper().DefineMethod(this, typeBuilder, "__<overridestub>" + baseMethod.DeclaringType.Name + "::" + baseMethod.Name, MethodAttributes.Private | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final);
+            MethodBuilder overrideStub = baseMethod.GetDefineMethodHelper().DefineMethod(this, typeBuilder, "___overridestub_" + baseMethod.DeclaringType.Name + "::" + baseMethod.Name, MethodAttributes.Private | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final);
             typeBuilder.DefineMethodOverride(overrideStub, (MethodInfo)baseMethod.GetMethod());
 
             TypeWrapper[] stubargs = baseMethod.GetParameters();

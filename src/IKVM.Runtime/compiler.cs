@@ -220,21 +220,21 @@ namespace IKVM.Runtime
 			if (CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType is TypeBuilder)
 			{
 				MethodWrapper mw;
-				mw = CoreClasses.java.lang.Throwable.Wrapper.GetMethodWrapper("__<suppressFillInStackTrace>", "()V", false);
+				mw = CoreClasses.java.lang.Throwable.Wrapper.GetMethodWrapper("___suppressFillInStackTrace_", "()V", false);
 				mw.Link();
 				suppressFillInStackTraceMethod = (MethodInfo)mw.GetMethod();
-				mw = CoreClasses.java.lang.Throwable.Wrapper.GetMethodWrapper("__<unmap>", "(Ljava.lang.Throwable;)Ljava.lang.Throwable;", false);
+				mw = CoreClasses.java.lang.Throwable.Wrapper.GetMethodWrapper("___unmap_", "(Ljava.lang.Throwable;)Ljava.lang.Throwable;", false);
 				mw.Link();
 				unmapExceptionMethod = (MethodInfo)mw.GetMethod();
-				mw = CoreClasses.java.lang.Throwable.Wrapper.GetMethodWrapper("__<fixate>", "(Ljava.lang.Throwable;)Ljava.lang.Throwable;", false);
+				mw = CoreClasses.java.lang.Throwable.Wrapper.GetMethodWrapper("___fixate_", "(Ljava.lang.Throwable;)Ljava.lang.Throwable;", false);
 				mw.Link();
 				fixateExceptionMethod = (MethodInfo)mw.GetMethod();
 			}
 			else
 			{
-				suppressFillInStackTraceMethod = CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType.GetMethod("__<suppressFillInStackTrace>", Type.EmptyTypes);
-				unmapExceptionMethod = CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType.GetMethod("__<unmap>", new Type[] { Types.Exception });
-				fixateExceptionMethod = CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType.GetMethod("__<fixate>", new Type[] { Types.Exception });
+				suppressFillInStackTraceMethod = CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType.GetMethod("___suppressFillInStackTrace_", Type.EmptyTypes);
+				unmapExceptionMethod = CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType.GetMethod("___unmap_", new Type[] { Types.Exception });
+				fixateExceptionMethod = CoreClasses.java.lang.Throwable.Wrapper.TypeAsBaseType.GetMethod("___fixate_", new Type[] { Types.Exception });
 			}
 			getClassFromTypeHandle = ClassLoaderWrapper.LoadClassCritical("ikvm.runtime.Util").GetMethodWrapper("getClassFromTypeHandle", "(Lcli.System.RuntimeTypeHandle;)Ljava.lang.Class;", false);
 			getClassFromTypeHandle.Link();

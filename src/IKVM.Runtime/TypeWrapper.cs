@@ -1409,7 +1409,7 @@ namespace IKVM.Internal
     {
         // note that MangleNestedTypeName() assumes that there are less than 16 special characters
         private const string specialCharactersString = "\\+,[]*&\u0000";
-        internal const string ProxiesContainer = "__<Proxies>";
+        internal const string ProxiesContainer = "___Proxies_";
 
         internal static string ReplaceIllegalCharacters(string name)
         {
@@ -1974,7 +1974,7 @@ namespace IKVM.Internal
     static class NamePrefix
     {
 
-        internal const string Type2AccessStubBackingField = "__<>";
+        internal const string Type2AccessStubBackingField = "____";
         internal const string AccessStub = "<accessstub>";
         internal const string NonVirtual = "<nonvirtual>";
         internal const string Bridge = "<bridge>";
@@ -1987,9 +1987,9 @@ namespace IKVM.Internal
     static class NestedTypeName
     {
 
-        internal const string CallerID = "__<CallerID>";
-        internal const string InterfaceHelperMethods = "__<>IHM";
-        internal const string PrivateInterfaceMethods = "__<>PIM";
+        internal const string CallerID = "___CallerID_";
+        internal const string InterfaceHelperMethods = "____IHM";
+        internal const string PrivateInterfaceMethods = "____PIM";
 
         // interop types (mangled if necessary)
         internal const string Fields = "__Fields";
@@ -1997,12 +1997,12 @@ namespace IKVM.Internal
         internal const string DefaultMethods = "__DefaultMethods";
 
         // prefixes
-        internal const string ThreadLocal = "__<tls>_";
-        internal const string AtomicReferenceFieldUpdater = "__<ARFU>_";
-        internal const string IndyCallSite = "__<>IndyCS";
-        internal const string MethodHandleConstant = "__<>MHC";
-        internal const string MethodTypeConstant = "__<>MTC";
-        internal const string IntrinsifiedAnonymousClass = "__<>Anon";
+        internal const string ThreadLocal = "___tls__";
+        internal const string AtomicReferenceFieldUpdater = "___ARFU__";
+        internal const string IndyCallSite = "____IndyCS";
+        internal const string MethodHandleConstant = "____MHC";
+        internal const string MethodTypeConstant = "____MTC";
+        internal const string IntrinsifiedAnonymousClass = "____Anon";
 
     }
 
@@ -3616,7 +3616,7 @@ namespace IKVM.Internal
     sealed class UnloadableTypeWrapper : TypeWrapper
     {
 
-        internal const string ContainerTypeName = "__<Unloadable>";
+        internal const string ContainerTypeName = "___Unloadable_";
         readonly Type missingType;
         Type customModifier;
 

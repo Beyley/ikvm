@@ -2694,7 +2694,7 @@ namespace IKVM.Internal
             if (IsRemapped)
             {
                 TypeWrapper shadow = ClassLoaderWrapper.GetWrapperFromType(type);
-                MethodInfo method = shadow.TypeAsBaseType.GetMethod("__<instanceof>");
+                MethodInfo method = shadow.TypeAsBaseType.GetMethod("___instanceof_");
                 if (method != null)
                 {
                     ilgen.Emit(OpCodes.Call, method);
@@ -2709,7 +2709,7 @@ namespace IKVM.Internal
             if (IsRemapped)
             {
                 TypeWrapper shadow = ClassLoaderWrapper.GetWrapperFromType(type);
-                MethodInfo method = shadow.TypeAsBaseType.GetMethod("__<checkcast>");
+                MethodInfo method = shadow.TypeAsBaseType.GetMethod("___checkcast_");
                 if (method != null)
                 {
                     ilgen.Emit(OpCodes.Call, method);

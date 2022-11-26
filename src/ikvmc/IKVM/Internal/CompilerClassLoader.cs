@@ -2047,7 +2047,7 @@ namespace IKVM.Internal
                     return;
                 }
                 MethodAttributes attr = MethodAttributes.SpecialName | MethodAttributes.Public | MethodAttributes.Static;
-                MethodBuilder mb = typeBuilder.DefineMethod("__<checkcast>", attr, shadowType, new Type[] { Types.Object });
+                MethodBuilder mb = typeBuilder.DefineMethod("___checkcast_", attr, shadowType, new Type[] { Types.Object });
                 AttributeHelper.HideFromJava(mb);
                 AttributeHelper.SetEditorBrowsableNever(mb);
                 CodeEmitter ilgen = CodeEmitter.Create(mb);
@@ -2610,7 +2610,7 @@ namespace IKVM.Internal
                     Type mainAssemblyType;
                     if (!mainAssemblyTypes.TryGetValue(compiler.options.sharedclassloader[0], out mainAssemblyType))
                     {
-                        TypeBuilder tb = compiler.options.sharedclassloader[0].GetTypeWrapperFactory().ModuleBuilder.DefineType("__<MainAssembly>", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.SpecialName);
+                        TypeBuilder tb = compiler.options.sharedclassloader[0].GetTypeWrapperFactory().ModuleBuilder.DefineType("___MainAssembly_", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.SpecialName);
                         AttributeHelper.HideFromJava(tb);
                         mainAssemblyType = tb.CreateType();
                         mainAssemblyTypes.Add(compiler.options.sharedclassloader[0], mainAssemblyType);

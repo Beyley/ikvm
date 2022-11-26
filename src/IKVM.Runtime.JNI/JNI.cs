@@ -195,7 +195,7 @@ namespace IKVM.Runtime
 
         internal static volatile bool jvmCreated;
         internal static volatile bool jvmDestroyed;
-        internal const string METHOD_PTR_FIELD_PREFIX = "__<jniptr>";
+        internal const string METHOD_PTR_FIELD_PREFIX = "___jniptr_";
 
 #if NETFRAMEWORK
         static readonly Encoding platformEncoding = Encoding.Default;

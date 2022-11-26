@@ -1099,7 +1099,7 @@ namespace ikvmc
                 {
                     foreach (Assembly asm in target.references)
                     {
-                        Type forwarder = asm.GetType("__<MainAssembly>");
+                        Type forwarder = asm.GetType("___MainAssembly_");
                         if (forwarder != null && forwarder.Assembly != asm)
                         {
                             StaticCompiler.IssueMessage(Message.NonPrimaryAssemblyReference, asm.Location, forwarder.Assembly.GetName().Name);

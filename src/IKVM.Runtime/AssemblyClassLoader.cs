@@ -94,7 +94,7 @@ namespace IKVM.Internal
         {
             // If the assembly is a part of a multi-assembly shared class loader,
             // it will export the __<MainAssembly> type from the main assembly in the group.
-            var forwarder = assembly.GetType("__<MainAssembly>");
+            var forwarder = assembly.GetType("___MainAssembly_");
             if (forwarder != null)
             {
                 var mainAssembly = forwarder.Assembly;
