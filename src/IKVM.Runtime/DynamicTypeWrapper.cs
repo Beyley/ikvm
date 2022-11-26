@@ -4268,7 +4268,7 @@ namespace IKVM.Internal
                                     MethodAttributes attr = mi.Attributes & ~(MethodAttributes.Abstract | MethodAttributes.NewSlot);
                                     if (needRename)
                                     {
-                                        name = "__<>" + name + "/" + mi.DeclaringType.FullName;
+                                        name = "__CC" + name + "/" + mi.DeclaringType.FullName;
                                         attr = MethodAttributes.Private | MethodAttributes.Virtual | MethodAttributes.NewSlot;
                                     }
                                     MethodBuilder mb = mw.GetDefineMethodHelper().DefineMethod(wrapper, typeBuilder, name, attr);
