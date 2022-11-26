@@ -3998,7 +3998,7 @@ namespace IKVM.Internal
                 {
                     if (ghostRefField == null)
                     {
-                        ghostRefField = type.GetField("__<ref>");
+                        ghostRefField = type.GetField("___ref_");
                     }
                     return ghostRefField;
                 }
@@ -4168,7 +4168,7 @@ namespace IKVM.Internal
                 {
                     try
                     {
-                        clinitMethod = type.GetMethod("__<clinit>", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                        clinitMethod = type.GetMethod("___clinit_", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
                     }
 #if STATIC_COMPILER
                     catch (IKVM.Reflection.MissingMemberException) { }
