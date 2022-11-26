@@ -1076,7 +1076,7 @@ namespace IKVM.Internal
                 {
                     attribs |= MethodAttributes.Public;
                 }
-                clinitMethod = typeBuilder.DefineMethod("__<clinit>", attribs, null, null);
+                clinitMethod = typeBuilder.DefineMethod("___clinit_", attribs, null, null);
                 clinitMethod.GetILGenerator().Emit(OpCodes.Ret);
                 // FXBUG on .NET 2.0 RTM x64 the JIT sometimes throws an InvalidProgramException while trying to inline this method,
                 // so we prevent inlining for now (it also turns out that on x86 not inlining this method actually has a positive perf impact in some cases...)
