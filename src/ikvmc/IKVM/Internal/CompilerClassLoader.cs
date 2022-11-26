@@ -1996,7 +1996,7 @@ namespace IKVM.Internal
                     return;
                 }
                 MethodAttributes attr = MethodAttributes.SpecialName | MethodAttributes.Public | MethodAttributes.Static;
-                MethodBuilder mb = typeBuilder.DefineMethod("__<instanceof>", attr, Types.Boolean, new Type[] { Types.Object });
+                MethodBuilder mb = typeBuilder.DefineMethod("___instanceof_", attr, Types.Boolean, new Type[] { Types.Object });
                 AttributeHelper.HideFromJava(mb);
                 AttributeHelper.SetEditorBrowsableNever(mb);
                 CodeEmitter ilgen = CodeEmitter.Create(mb);
