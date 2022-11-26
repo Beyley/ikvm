@@ -343,7 +343,7 @@ namespace IKVM.Internal
                 {
                     return type;
                 }
-                TypeBuilder tb = moduleBuilder.DefineType(returnVoid ? "__<>NVIV`" + parameterCount : "__<>NVI`" + (parameterCount + 1), TypeAttributes.NotPublic | TypeAttributes.Sealed, Types.MulticastDelegate);
+                TypeBuilder tb = moduleBuilder.DefineType(returnVoid ? "____NVIV`" + parameterCount : "____NVI`" + (parameterCount + 1), TypeAttributes.NotPublic | TypeAttributes.Sealed, Types.MulticastDelegate);
                 string[] names = new string[parameterCount + (returnVoid ? 0 : 1)];
                 for (int i = 0; i < names.Length; i++)
                 {
