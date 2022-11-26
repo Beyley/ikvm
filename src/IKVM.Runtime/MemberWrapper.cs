@@ -760,7 +760,7 @@ namespace IKVM.Internal
 			if (paramTypes.Length > MethodHandleUtil.MaxArity)
 			{
 				Type type = DeclaringType.TypeAsBaseType.Assembly.GetType(
-					ReturnType == PrimitiveTypeWrapper.VOID ? "__<>NVIV`" + paramTypes.Length : "__<>NVI`" + (paramTypes.Length + 1));
+					ReturnType == PrimitiveTypeWrapper.VOID ? "____NVIV`" + paramTypes.Length : "____NVI`" + (paramTypes.Length + 1));
 				if (type == null)
 				{
 					type = DeclaringType.GetClassLoader().GetTypeWrapperFactory().DefineDelegate(paramTypes.Length, ReturnType == PrimitiveTypeWrapper.VOID);
